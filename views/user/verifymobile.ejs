@@ -1,0 +1,43 @@
+<div id="mobile-controller" ng-controller="VerifyMobileController">
+
+    <!--form name="mobileForm"-->
+    <div class="form-group row">
+        <label class="<%= labelwidth ? labelwidth : '' %> formlabel" style="float:left" for="phone">Phone</label>
+        <div class="col-sm-4">
+            <input ng-disabled="phoneDisabled" type="tel" ng-intl-tel-input
+                   ng-change="$parent.phone_verified = null;$parent.mobile.verified = false" class="form-control"
+                   ng-model="<%= ngmodel %>"/>
+
+        </div>
+        <div class="col-sm-4">
+            <Button type="button" promise-btn class="btn btn-small btn-success" style="height: 35px"
+                    ng-click="sendMobileCode()">
+                <span ng-if="!phoneDisabled" ng-hide="sendingMobileCode" ng-cloak>Verify</span>
+                <span ng-if="phoneDisabled" ng-hide="sendingMobileCode" ng-cloak>Change</span>
+                <i class="fa fa-circle-o-notch fa-spin" ng-show="sendingMobileCode" ng-cloak></i>
+            </Button>
+        </div>
+        <!--span class="help-block" ng-show="mobileForm.phone.$error.required || mobileForm.phone.$error.tel">Valid phone number is required</span-->
+    </div>
+    <!--/form-->
+    <!--form name="codeForm" ng-if="codeSent"-->
+
+        <div class="row form-group" ng-if="codeSent">
+            <label class="<%= labelwidth ? labelwidth : '' %> formlabel" style="float:left" for="code">CODE</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="CODE" name="code" id="code" ng-model="mobileCode"
+                       required/>
+
+            </div>
+            <div class="col-sm-4">
+                <button type="button" promise-btn class="btn btn-success btn-small" style="height: 35px"
+                        ng-click="verifyMobileCode(mobileCode)" style="min-width:54px;">
+                    <span style="width:54px;" ng-cloak>Submit</span>
+                </button>
+                <span ng-show="invalidCode" class="text-error">Invalid Code.</span>
+            </div>
+            <!--span class="help-block" ng-show="mobileForm.phone.$error.required || mobileForm.phone.$error.tel">Valid phone number is required</span-->
+        </div>
+
+    <!--/form-->
+</div>

@@ -1,0 +1,64 @@
+<div class="section p-t-60 p-b-60" ng-controller="SignupController" ng-cloak>
+
+    <div class="row login-container column-seperation">
+        <div class="col-md-5 col-md-offset-1">
+            <h2>Sign in to <%= sails.config.appName %></h2>
+            <p>Login with Facebook and start banking with your friends.<br>
+                <a href="/signup">Sign up Now!</a> for a <%= sails.config.appName %> account,It's free and always will be..</p>
+            <br>
+            <p>We promise to never post on your facebook wall or let any of your friends get invited without your permission</p>
+            <%- partial("logininhalt", {concatenate:"Login"}) %>
+
+
+        </div>
+        <div class="col-md-5 "> <br>
+            <form id="login-form" class="login-form">
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Email</label>
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input ng-model="loginForm.email" type="email" placeholder="Email" name="email" id="txtusername" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Password</label>
+                        <span class="help"></span>
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input ng-model="loginForm.password" type="password" placeholder="Password" id="txtpassword" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <a href="/user/resetpassemail" style="text-decoration: underline">Forgot password?</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <button promise-btn ng-click="submitLoginForm()" class="btn btn-primary btn-cons pull-right" type="submit">
+
+                            <span ng-show="!loginForm.loading">Login</span>
+                            <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
+                            <span ng-show="loginForm.loading">Logging in...</span>
+                        </button>
+                        <span ng-show="loginfailed" style="color:#a94442">Invalid email/password combination.</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="p-b-60 p-t-10">
+</div>

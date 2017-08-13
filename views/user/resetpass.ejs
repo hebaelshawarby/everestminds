@@ -1,0 +1,18 @@
+<div class="section p-t-60 p-b-60" ng-cloak>
+
+    <div class="row login-container column-seperation">
+        <div class="col-md-5 col-md-offset-1">
+            <h2>Choose a new password</h2>
+
+        </div>
+        <div class="col-md-5 " ng-init="changePasswordMode=true;redirect_url='/login';user_id=<%= JSON.stringify(data.user_id) %>;reset_token='<%= req.param("reset_token") %>';">
+            <%- partial("password") %>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="p-b-60 p-t-10">
+</div>

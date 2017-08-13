@@ -1,0 +1,144 @@
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+  async defer
+></script>
+
+<div id="signup-controller" ng-controller="SignupController" class="section {{nosignuptext ? '' : 'p-t-60'}} p-b-60" ng-cloak>
+
+
+<div class="row login-container column-seperation">
+        <div ng-hide="nosignuptext" class="col-md-5 col-md-offset-1">
+            <h2>Create an account</h2>
+            <p>Sign up with Facebook.</p>
+            <br>
+            <p>We promise to never post on your facebook wall or let any of your friends get invited without your permission</p>
+            <%- partial("user/logininhalt", {concatenate:"Sign Up"}) %>
+
+        </div>
+        <div class="col-md-5 col-centered">
+            <form id="sign-up-form" class="form-signin" name="signup" ng-hide="nosignuptext">
+                <div class="row">
+                    <!-- F I R S T - N A M E -->
+
+                    <div class="control-group form-group col-md-6"
+                         ng-class="{'has-error':signup.first_name.$invalid &&
+                        signup.first_name.$dirty}">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" placeholder="e.g. Genius" name="first_name" ng-model="signupForm.first_name" ng-maxlength="50" required>
+                              <span class="help-block has-error" ng-if="signup.first_name.$dirty">
+                                <span ng-show="signup.first_name.$error.required">First Name is required.</span>
+                                <span ng-show="signup.first_name.$error.maxlength">The first name cannot be more than 50 characters.</span>
+                              </span>
+                    </div>
+
+                    <!-- L A S T - N A M E -->
+
+                    <div class="control-group form-group col-md-6"
+                         ng-class="{'has-error':signup.last_name.$invalid &&
+                        signup.last_name.$dirty}">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" placeholder="e.g. Genius" name="last_name" ng-model="signupForm.last_name" ng-maxlength="50" required>
+                              <span class="help-block has-error" ng-if="signup.last_name.$dirty">
+                                <span ng-show="signup.last_name.$error.required">Last Name is required.</span>
+                                <span ng-show="signup.last_name.$error.maxlength">The last name cannot be more than 50 characters.</span>
+                              </span>
+                    </div>
+                </div>
+
+                <!-- E M A I L -->
+
+                <div class="row">
+                    <div class="form-group control-group col-md-12" ng-class="{'has-error':signup.email.$invalid &&
+                      signup.email.$dirty}">
+                        <label class="form-label">Email</label>
+
+                                <input type="email" class="form-control" placeholder="nikola@tesla.com" name="email" ng-model="signupForm.email" required>
+
+                        <span class="help-block has-error" ng-if="signup.email.$dirty">
+                            <span ng-show="signup.email.$error.required">Email address is required.</span>
+                            <span ng-show="signup.email.$error.email">Not a valid email address.</span>
+
+                      </span>
+                      <span class="help-block has-error">
+                            <span ng-show="emailAddressAlreadyInUse" style="color:#a94442">Email address already in use.</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group control-group">
+                        <label for="Residency">Resident in</label>
+
+                      <%- partial("utils/countryform", {ngmodel: 'signupForm.residency_country'}) %>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- P A S S W O R D -->
+
+                    <div class="control-group form-group col-md-6"
+                         ng-class="{'has-error':signup.password.$invalid &&
+                      signup.password.$dirty}">
+                        <label>Choose a password</label>
+                        <!-- Added the compareTo directive that compares the passowrds -->
+                        <input type="password" class="form-control" placeholder="at least 6 characters" name="password" ng-model="signupForm.password" id="password" required ng-minlength="6" compare-to="signupForm.confirmation" >
+                          <span class="help-block has-error" ng-if="signup.password.$dirty">
+                            <span ng-show="signup.password.$error.required">Password is required.</span>
+                            <span ng-show="signup.password.$error.minlength">Password must be at least 6 characters.</span>
+                          </span>
+                    </div>
+
+                    <!-- C O N F I R M  P A S S W O R D -->
+
+                    <div class="control-group form-group col-md-6">
+                        <label>Re-enter your password</label>
+                        <input type="password" class="form-control" placeholder="one more time" name="confirmation" ng-model="signupForm.confirmation" required>
+                          <span class="help-block has-error" ng-if="signup.confirmation.$dirty">
+                            <span class="text-error" ng-show="signup.password.$error.compareTo">Password must match.</span>
+                            <span class="text-error" ng-show="signup.confirmation.$error.required">Confirmation password is required.</span>
+                          </span>
+                    </div>
+                </div>
+
+                <!-- G O O G L E recaptcha -->
+
+                <div class="row">
+                    <div class="form-group control-group col-md-12">
+                        <div vc-recaptcha key="'<%= sails.config.googleRecaptcha.site_key %>'" ng-model="signupForm.captcha" required></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button promise-btn class="btn btn-primary btn-cons pull-right" ng-click="submitSignupForm()" ng-disabled="signup.$invalid">
+
+                            <span ng-show="!signupForm.loading">Create Account</span>
+                            <span class="overlord-loading-spinner fa fa-spinner" ng-show="signupForm.loading" ></span>
+                            <span ng-show="signupForm.loading">Preparing your new account...</span>
+                        </button>
+                        <a href="/login">Already have an account? Log in now</a>
+                    </div>
+                    <div class="col-md-12">
+                        <span ng-show="passwordMismatch" class="text-error">Password Mismatch.</span>
+                        <span ng-show="signupError" class="text-error" ng-bind="signupError"></span>
+
+                    </div>
+                </div>
+
+
+
+            </form>
+
+            <div ng-show="nosignuptext" class="col-md-12 col-centered">
+                <%- partial("user/logininhalt", {concatenate:"Sign Up"}) %>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>

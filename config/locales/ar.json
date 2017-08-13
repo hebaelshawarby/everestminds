@@ -1,0 +1,29 @@
+{
+
+
+    "Home title button" : "Home",
+    "Contact button" : "Contact",
+    "Login button" : "Login",
+    "Logout button" : "Logout",
+
+    "Feedback title" : "Feedback",
+    "Questions title" : "Questions",
+    "Edit profile picture title" : "Edit profile picture",
+
+
+
+    "Confirm your personal info title" : "Confirm your personal info",
+    "I herby confirm the above title" : "I herby confirm that the above info is correct",
+
+
+
+    "Residents in field" : "Residents in",
+    "Nationality field" : "Nationality",
+    "Birthdate field" : "Birthdate",
+    "First name field" : "First Name",
+    "Last Name field" : "Last Name",
+    "Address field" : "Address"
+
+
+
+}

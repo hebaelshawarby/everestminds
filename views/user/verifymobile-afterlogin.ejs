@@ -1,0 +1,18 @@
+<div class="section p-t-60 p-b-60" ng-cloak>
+
+    <div class="row login-container column-seperation">
+        <div class="col-md-5 col-md-offset-1">
+            <h2>Please verify your mobile</h2>
+<p>You can <a href="/">skip</a> verification step, but you will be prompt to verify your mobile before joining any circle.</p>
+        </div>
+        <div class="col-md-5 " ng-init="redirect_url='/';">
+            <%- partial("verifymobile", {labelwidth: 'col-xs-2', ngmodel: 'user.phone'}) %>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="p-b-60 p-t-10">
+</div>

@@ -1,0 +1,68 @@
+<div class="col-xs-10 col-xs-offset-1">
+    <div class="row panel panel-default text-center">
+
+        <h4 class="" ng-bind="user.name">  </h4>
+        <div class="row p-t-10 p-b-10 profile-img-wrapper">
+            <i class="fa fa-upload fa-2x upload-icon btn-file" ng-hide="loadingProfileImg" style="cursor: pointer">
+                <input file-model="avatar" type="file" name="avatar">
+            </i>
+            <i class="fa fa-circle-o-notch fa-spin fa-2x" ng-show="loadingProfileImg"></i>
+            <div class="loading-overlay" ng-show="loadingProfileImg"></div>
+            <form action="/user/avatar" enctype="multipart/form-data" method="post" id="profile-img-form">
+
+                <img class="img-circle user_profile big center-block" ng-src="{{user.profile_pic}}" />
+                <span ng-show="fileSizeError" class="text-error">File size is larger than 2 MB</span>
+                <span ng-show="fileTypeError" class="text-error">Allowed extensions: JPG, PNG or GIF</span>
+
+
+            </form>
+        </div>
+        <div class="p-b-10 col-xs-10 col-xs-offset-1 text-center"  ng-cloak>
+
+        </div>
+
+        <div class="p-t-20 p-b-10 col-xs-8 col-xs-offset-2"  ng-cloak>
+
+        </div>
+
+        <div class="p-b-10 col-xs-10 col-xs-offset-1"  ng-cloak>
+        </div>
+
+        <div class="p-b-10 col-xs-10 col-xs-offset-1 text-center"  ng-cloak>
+
+        </div>
+
+        <div ng-if="!user.fb" style="padding:0 10px 10px 10px;">
+            <button class="btn btn-block btn-info col-md-8 social-button" type="button" ng-click="socialLogin('facebook')" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="facebook-login">
+                <span class="pull-left"><i class="icon-facebook"></i></span>
+                <span class="bold">Connect to Facebook</span>
+                </button>
+
+
+        </div>
+
+        <!--<div ng-if="!user.twitter_id" style="padding:0 10px 10px 10px;">
+            <button class="btn btn-block btn-success col-md-8 social-button" type="button" ng-click="socialLogin('twitter')" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="twitter-login">
+                <span class="pull-left"><i class="icon-twitter"></i></span>
+                <span class="bold">Connect to Twitter</span>
+            </button>
+        </div>
+
+        <div ng-if="!user.google_id" style="padding:0 10px 10px 10px;">
+            <button class="btn btn-block btn-danger col-md-8 social-button" type="button" ng-click="socialLogin('google')" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="google-login">
+                <span class="pull-left"><i class="icon-google"></i></span>
+                <span class="bold">Connect to Google</span>
+            </button>
+        </div>
+
+        <div ng-if="!user.linkedin_id" style="padding:0 10px 10px 10px;">
+
+            <button class="btn btn-block btn-info col-md-8" style="background-color:#4875B4" type="button" ng-click="socialLogin('linkedIn')" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="linkedIn-login">
+                <span class="pull-left"><i class="icon-linkedin"></i></span>
+                <span class="bold">Connect to LinkedIn</span>
+            </button>
+        </div>-->
+    </div>
+</div>
+
+

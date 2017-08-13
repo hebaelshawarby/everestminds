@@ -1,0 +1,25 @@
+<button class="btn btn-block btn-info col-md-8" type="button" ng-click="socialLogin('facebook', redirect_url)" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="facebook-login">
+    <span class="pull-left"><i class="icon-facebook"></i></span>
+    <span class="bold"><%= concatenate %> with Facebook</span> </button>
+
+<!--button class="btn btn-block btn-success col-md-8" type="button" ng-click="socialLogin('twitter', redirect_url)" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="twitter-login">
+    <span class="pull-left"><i class="icon-twitter"></i></span>
+    <span class="bold"><%= concatenate %> with Twitter</span>
+</button>
+
+<button class="btn btn-block btn-danger col-md-8" type="button" ng-click="socialLogin('google', redirect_url)" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="google-login">
+    <span class="pull-left"><i class="icon-google"></i></span>
+    <span class="bold"><%= concatenate %> with Google</span>
+</button>
+
+<button class="btn btn-block btn-info col-md-8" style="background-color:#4875B4" type="button" ng-click="socialLogin('linkedIn', redirect_url)" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="linkedIn-login">
+    <span class="pull-left"><i class="icon-linkedin"></i></span>
+    <span class="bold"><%= concatenate %> with LinkedIn</span>
+</button!-->
+
+<div style="margin:0 auto;text-align:center;font-size:20px;" ng-if="<%= concatenate != 'Sign Up' %>" >OR</div>
+
+<a class="btn btn-block col-md-8" ng-if="<%= concatenate != 'Sign Up' %>" style="background-color:#0aa699 !important;color:white;" type="button" href="/signup" analytics-on="click" analytics-event="login-trial" analytics-category="action" analytics-label="google-login">
+    <span class="pull-left"><i class="icon-google"></i></span>
+    <span class="bold">Sign Up Now!</span>
+</a>

@@ -1,0 +1,42 @@
+<div class="section p-t-60 p-b-60" ng-cloak>
+
+    <div class="row login-container column-seperation">
+        <div class="col-md-5 col-md-offset-1">
+            <h2>Enter your subscribed email</h2>
+
+        </div>
+        <div class="col-md-5 "> <br>
+            <form id="email-form" class="login-form" ng-submit="submitResetForm(emailForm.email)">
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Email</label>
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input ng-model="emailForm.email" type="email" placeholder="Email" name="email" id="txtusername" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <button class="btn btn-primary btn-cons pull-right" type="submit">
+
+                            <span ng-show="!emailForm.loading">Submit</span>
+                            <span ng-show="emailForm.loading" class="fa fa-spinner"></span>
+                            <span ng-show="emailForm.loading">Sending...</span>
+                        </button>
+                        <span ng-show="resetfailed" class="text-error">This email is not registered.</span>
+                        <span ng-show="emailForm.resetsuccessful">An email has been sent to you with change password instructions.</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="p-b-60 p-t-10">
+</div>

@@ -1,0 +1,42 @@
+<div id="profile-controller" ng-controller="AccountController" ng-cloak>
+
+  <div class="p-t-40"></div>
+
+
+  <div class="row profiletabs">
+    <div class="col-lg-4 col-xs-12">
+    <!-- Left Column Profile Picture -->
+        <%- partial("profilestatus") %>
+    </div>
+    <div class="col-lg-7 col-xs-10 col-xs-offset-1 col-lg-offset-0">
+      <div class="row" ng-init="activetab=<%= data.activetab %>;">
+        <div class="col-xs-12">
+          <div class="navbar-collapse tabsholder text-center">
+            <ul class="nav navbar-nav " style="float: none;display: inline-block">
+              <li class="paymentabsli"><div class="bar"  ng-class="{inactive : activetab!=0}"></div><a class="paymenttabs" href="#" ng-click="activetab=0">Personal Info</a></li>
+              <li class="paymentabsli"><div class="bar" class="hidden" ng-class="{inactive : activetab!=1}"></div> <a ng-click="activetab=1" class="paymenttabs" href="#">Password</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+    <uib-tabset class="tab-animation row" active="activetab">
+      <uib-tab index="0" >
+
+            <%-partial("personalinfo") %>
+
+      </uib-tab>
+        <!-- End Personal Info Panel -->
+
+      <uib-tab index="1" >
+
+        <%- partial("password") %>
+
+      </uib-tab>
+      </uib-tabset>
+
+    </div>
+  </div>
+
+  <div class="p-t-40 p-b-50"></div>
+</div>

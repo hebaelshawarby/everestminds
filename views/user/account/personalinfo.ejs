@@ -1,0 +1,126 @@
+<div class="col-lg-12">
+  <div class="row panel panel-default form-horizontal overlaycontainer personal-info-panel">
+    <form name="inputForm">
+      <div class="p-t-20"></div>
+
+      <% var labelwidth = "col-sm-2"; %>
+      <div class="form-group">
+        <label class="<%= labelwidth %> formlabel" for="firstname">First Name </label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" placeholder="First Name" name="firstname" ng-model="user.first_name"
+                 required/>
+        </div>
+        <label class="<%= labelwidth %> formlabel second" for="lastname">Last Name</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" placeholder="Last Name" name="lastname" ng-model="user.last_name"
+                 required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="<%= labelwidth %> formlabel" for="email">Email</label>
+        <div class="col-sm-4">
+          <input type="email" class="form-control" placeholder="name@example.com" name="email" ng-model="user.email"
+                 required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="<%= labelwidth %> formlabel" for="email">Work Email</label>
+        <div class="col-sm-4">
+          <input type="email" class="form-control" placeholder="name@companydomain.com" name="work_email"
+                 ng-model="user.work_email"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="<%= labelwidth %> formlabel" for="Birthdate">Birthdate</label>
+        <div class="col-sm-10">
+          <select ng-options="n for n in [] | range:1:31" class="col-xs-1 formselectday" ng-model="user.birth_day"
+                  required>
+          </select>
+          <select ng-options="month.id as month.name for month in months" class="col-xs-1 formselectmonth"
+                  ng-model="user.birth_month" required>
+          </select>
+          <select class="col-xs-2 formselect"
+                  ng-options="n for n in [] | rangerev:1934:<%= new Date().getFullYear()-17 %>"
+                  ng-model="user.birth_year" required>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="<%= labelwidth %> formlabel" for="Nationality">Nationality</label>
+        <div class="col-sm-6">
+          <%- partial("../../utils/countryform", {ngmodel: 'user.nationality'}) %>
+
+
+        </div>
+
+      </div>
+      <div class="form-group">
+
+        <label class="<%= labelwidth %> formlabel" for="Residency">Resident in</label>
+        <div class="col-sm-6">
+          <%- partial("../../utils/countryform", {ngmodel: 'user.residency_country'}) %>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label class="<%= labelwidth %> formlabel" for="Residency">City</label>
+        <div class="col-sm-6">
+          <%- partial("../../utils/cityform") %>
+        </div>
+
+      </div>
+
+      <div class="form-group" ng-if="user.city == 'Cairo'">
+
+        <label class="<%= labelwidth %> formlabel" for="Residency">Area</label>
+        <div class="col-sm-6">
+          <select ng-options="area as area for area in areas" class="col-sm-6 formselect" ng-model="user.area" required>
+
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label class="<%= labelwidth %> formlabel" for="Residency">Street Address</label>
+        <div class="col-sm-10">
+                     <textarea ng-model="user.address" required>
+
+                     </textarea>
+        </div>
+
+      </div>
+
+      <div class=" form-group">
+        <div class="col-xs-7 col-xs-offset-2">
+          <div class="checkbox check-default ">
+
+            <input type="checkbox" class="form-control" name="privacy" id="checkbox1" ng-model="privacychecked"
+                   required>
+            <label for="checkbox1" ng-class="{error : validityfailedonce && !privacychecked}">I hereby confirm the
+              information above is accurate</label>
+
+          </div>
+          <span ng-show="unique_email_error"
+                class="text-error">One of your emails is already assigned to another user.</span>
+        </div>
+        <div class="<%= labelwidth %>">
+          <input type="submit" value="Save" ng-disabled="inputForm.$invalid" class="btn btn-small btn-success btn-block" promise-btn ng-click="updateAccount()">
+
+        </div>
+      </div>
+
+
+    </form>
+    <div class="row">
+      <div class="col-lg-9 col-lg-offset-2">
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
