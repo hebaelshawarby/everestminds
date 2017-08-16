@@ -34,8 +34,15 @@ module.exports.routes = {
   'POST /signup':'AuthController.signup',
   'POST /search':'VisitorController.Search',
   'POST /filter':'VisitorController.filter',
-  'POST /productsWithinCategory':'VisitorController.productsWithinCategory',
-  'POST /purchaseNumber':'VisitorController.viewNumberofProduct_Purchase_asVisitor',
+  'GET /productsWithinCategory':'VisitorController.productsWithinCategory',
+  'GET /purchaseNumber':'VisitorController.viewNumberofProduct_Purchase_asVisitor',
+  'GET /bestSeller':'VisitorController.bestSeller',
+  'GET /bestRatings':'VisitorController.bestRatings',
+  'GET /viewEvent':'EventController.viewEvent',
+  'GET /viewEvents':'EventController.viewEvents',
+  'GET /viewLatestEvents':'EventController.viewLatestEvents',
+
+
 
   'POST /product/shopAddProductVariation':'ProductController.shopAddProductVariation',
   'POST /product/shopUpdateProductVariation':'ProductController.shopUpdateProductVariation',

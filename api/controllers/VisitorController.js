@@ -23,7 +23,7 @@
 					return res.negotiate(err)
 				}
 				if(products.length==0)
-					res.ok('There is no product which have the following keyword')
+					return res.ok('There is no product which have the following keyword')
 				res.ok(products)
 
 			})
@@ -35,7 +35,7 @@
 					return res.negotiate(err)
 				}
 				if(products.length==0)
-					res.ok('There is no product in this category')
+					return res.ok('There is no product in this category')
 				res.ok(products)
 
 			})
@@ -48,7 +48,7 @@
 					return res.negotiate(err)
 				}
 				if(products.length==0)
-					res.ok('There is no product which have the following keyword')
+					return res.ok('There is no product which have the following keyword')
 				res.ok(products)
 
 			})
@@ -84,7 +84,7 @@
  				return res.negotiate(err)
  			}
  			if(products.length==0)
- 				res.ok('There is no product which have the following keyword')
+ 				return res.ok('There is no product which have the following keyword')
  			res.ok(products)
 
  		})
@@ -97,6 +97,8 @@
  				Reporting.logError(err, __filename, req.user)
  				return res.negotiate(err)
  			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
 
  			res.ok(products)
  		})
@@ -108,6 +110,8 @@
  				Reporting.logError(err, __filename, req.user)
  				return res.negotiate(err)
  			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
 
  			res.ok(products)
  		})
@@ -118,6 +122,8 @@
  				Reporting.logError(err, __filename, req.user)
  				return res.negotiate(err)
  			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
 
  			res.ok(products)
  		})
@@ -129,6 +135,8 @@
  				Reporting.logError(err, __filename, req.user)
  				return res.negotiate(err)
  			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
 
  			res.ok(products)
  		})
@@ -141,6 +149,8 @@
  				Reporting.logError(err, __filename, req.user)
  				return res.negotiate(err)
  			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
  			res.ok(products)
 
  		}) 
@@ -153,18 +163,22 @@ else if (searchBy=='bestSeller'&& keyword!==undefined){
  				Reporting.logError(err, __filename, req.user)
  				return res.negotiate(err)
  			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
  	    res.ok(products)
 
 	})
 }
 
 else{
-	Product.find({keywords:{'contains':keyword}}).exec(function(err,product){
+	Product.find({keywords:{'contains':keyword}}).exec(function(err,products){
 		if(err){
 			Reporting.logError(err, __filename, req.user)
 			return res.negotiate(err)
 		}
-		return res.json(product)
+		if(products.length==0)
+ 				return res.ok('There is no product')
+		return res.ok(products)
 	})
 }
 
@@ -179,9 +193,38 @@ else{
 				Reporting.logError(err, __filename, req.user)
 				return res.negotiate(err)
 			}
-			return res.json(products)
+			if(products.length==0)
+ 				return res.ok('There is no product')
+			return res.ok(products)
 		})
 	},
+
+	bestSeller:function(req,res,next){
+	Product.find({purchaseNumber:{'!':null}}).sort({purchaseNumber:'desc'}).limit(4).exec(function(err,products){
+ 			if(err){
+ 				Reporting.logError(err, __filename, req.user)
+ 				return res.negotiate(err)
+ 			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
+ 			res.ok(products)
+
+ 		}) 	
+	},
+
+	bestRatings:function(req,res,next){
+	Product.find().sort({rate:'desc'}).limit(4).exec(function(err,products){
+ 			if(err){
+ 				Reporting.logError(err, __filename, req.user)
+ 				return res.negotiate(err)
+ 			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product')
+
+ 			res.ok(products)
+ 		})
+	},
+
 
 	viewNumberofProduct_Purchase_asVisitor:function(req, res, next){
 
@@ -205,6 +248,9 @@ Product.findOne({id: req.param('product_id')}).exec(function(err,product){
             });
      
 
-      }
+      },
+
+
+
 };
 

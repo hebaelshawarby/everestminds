@@ -6,24 +6,45 @@
  */
 
 module.exports = {
-	 view: function(req,res,next){
+   viewEvent: function(req,res,next){
    Event.findOne({id:req.param('id')}).exec(function(err,event){
+    if(err){
+      return res.serverError(err)
+    }
+    if(!event){
+     return res.notFound('no event')   
+     } 
+     res.ok(event)
+
+  })
+
+  },
+
+  viewEvents:function(req,res,next){
+    Event.find().exec(function(err,events){
+    if(err){
+      return res.serverError(err)
+    }
+    if(!events){
+     return res.notFound('no event')   
+     } 
+     res.ok(events)
+    })
+  },
+  
+  viewLatestEvents:function(req,res,next){
+    Event.find().sort({start_Date:'desc'}).limit(3).exec(function(err,events){
       if(err){
       return res.serverError(err)
     }
-    if(event){
-     return res.ok(event)   
+    if(!events){
+     return res.notFound('no event')   
      } 
-
-  })
- //  Event.findOne({id:req.param('id')}).populate('owner').exec(function(err,event){
- //  		if(err){
- //      return res.serverError(err)
- //    }
- //    res.json(event.owner.id)
- //  	})
+     res.ok(events)
+    
+    })
   }
-	
+  
 };
 
 
