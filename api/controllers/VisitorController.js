@@ -62,6 +62,10 @@
  filter: function(req,res,next){
  	var searchBy= req.param('searchBy');
  	var keyword=req.param('keyword');
+ 	var price=req.param('price');
+ 	var color=req.param('color');
+ 	var material=req.param('material');
+ 	var size=req.param('size')
 
  	if (searchBy=='discount' && keyword!==undefined){
  		Product.find({keywords:{'contains':keyword},discount:{'!':null}}).exec(function(err,products){
@@ -77,6 +81,42 @@
  		})
 
  	}
+ 	else if(searchBy=='price'){ 	
+ 		Product.find({keywords:{'contains':keyword},product_variation: { 'contains': price }}).exec(function(err,products){
+ 			if(err){
+ 				Reporting.logError(err, __filename, req.user)
+ 				return res.negotiate(err)
+ 			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product which have the following keyword')
+ 			res.ok(products)
+ 		})
+ 	}
+
+ 		else if(searchBy=='color'){ 	
+ 		Product.find({keywords:{'contains':keyword},product_variation: { 'contains': color }}).exec(function(err,products){
+ 			if(err){
+ 				Reporting.logError(err, __filename, req.user)
+ 				return res.negotiate(err)
+ 			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product which have the following keyword')
+ 			res.ok(products)
+ 		})
+ 	}
+
+ 		else if(searchBy=='size'){ 	
+ 		Product.find({keywords:{'contains':keyword},product_variation: { 'contains': size }}).exec(function(err,products){
+ 			if(err){
+ 				Reporting.logError(err, __filename, req.user)
+ 				return res.negotiate(err)
+ 			}
+ 			if(products.length==0)
+ 				return res.ok('There is no product which have the following keyword')
+ 			res.ok(products)
+ 		})
+ 	}
+
  	else if(searchBy=='discount' && keyword==undefined){
  		Product.find({discount:{'!':null}}).exec(function(err,products){
  			if(err){

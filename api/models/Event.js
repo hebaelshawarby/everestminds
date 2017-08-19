@@ -8,6 +8,14 @@
 module.exports = {
 
   attributes: {
+    title:{
+      type:'string',
+      required:true
+    },
+    location:{
+      type:'string',
+      required:true
+    },
  start_Date:{
       type: 'string',
       required: true
