@@ -49,6 +49,7 @@ How To
   
   
 4. The server is running on port 1337 so using postman you can testing any route in config/routes
+You can see the homepage in localhost:1337
 
 
 
